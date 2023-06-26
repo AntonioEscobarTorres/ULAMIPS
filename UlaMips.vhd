@@ -6,7 +6,6 @@ entity UlaMips is
         clk   : in std_logic;
         iniciar : in std_logic;
         reset: in std_logic;
-        enRegA, enRegB, enRegC: in std_logic;
         UlaOp: in std_logic_vector(1 downto 0);
         funct: in std_logic_vector(5 downto 0);
         a: in std_logic_vector(31 downto 0);
@@ -39,12 +38,33 @@ architecture rtl of UlaMips is
         );
     end component;
 
+    component controlador_estados is
+        port (
+            clk   : in std_logic;
+            reset : in std_logic;
+            iniciar: in std_logic;
+            EnRegA, enRegB, enRegC: out std_logic;
+            pronto: out std_logic
+        );
+    end component;
+
     signal sel: std_logic_vector(2 downto 0);
     signal regA_to_ula: std_logic_vector(31 downto 0);
     signal regB_to_ula: std_logic_vector(31 downto 0);
     signal ula_to_regC: std_logic_vector(31 downto 0);
+    signal ula_to_zero: std_logic;
+    signal enRegA, enRegB, enRegC: std_logic;
 
 begin
+    controlador_es: controlador_estados
+        port map(
+            clk => clk,
+            reset => reset,
+            iniciar => iniciar,
+            EnRegA => enRegA,
+            EnRegB => enRegB,
+            EnRegC => enRegC
+        );
     RegA: registrador
         port map(
             CLK => clk,
