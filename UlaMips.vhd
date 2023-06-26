@@ -52,7 +52,6 @@ architecture rtl of UlaMips is
     signal regA_to_ula: std_logic_vector(31 downto 0);
     signal regB_to_ula: std_logic_vector(31 downto 0);
     signal ula_to_regC: std_logic_vector(31 downto 0);
-    signal ula_to_zero: std_logic;
     signal enRegA, enRegB, enRegC: std_logic;
 
 begin

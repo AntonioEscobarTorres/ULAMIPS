@@ -7,7 +7,7 @@ entity controlador_estados is
         reset : in std_logic;
         iniciar: in std_logic;
         EnRegA, enRegB, enRegC: out std_logic;
-        zero_saida, pronto: out std_logic
+        pronto: out std_logic
     );
 end entity;
 
